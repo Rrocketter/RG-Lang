@@ -1,5 +1,6 @@
 | (means plus or minus)
 * (zero or more)
+? (optional)
 
 expression : KEYWORD: VAR IDENTIFIER EQ expr
            : comparision expression (( KEYWORD: AND | KEYWORD: OR ) comparision expression)*
@@ -18,7 +19,15 @@ POWER : atom (POW factor)*
 
 atom :  INT | FlOAT | IDENTIFIER
      :  LPAREN EXPR RPAREN
+     :  if-expression
+     :  for-expression
+     :  while-expression
 
 if-expression : KEYWORD: IF expression KEYWORD: THEN expression
                 (KEYWORD: ELIF expression KEYWORD: THEN expression)*
-                (KEYWORD: ELSE expression)? //? means optional
+                (KEYWORD: ELSE expression)?
+
+for-expression : KEYWORD: FOR IDENTIFIER EQ expression KEYWORD: TO expression
+                 (KEYWORD: STEP expression)? KEYWORD: THEN expression
+
+while-expression : KEYWORD: WHILE expression KEYWORD: THEN expression
