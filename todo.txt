@@ -1,0 +1,4 @@
+#add true and false to boolean
+    right now only 0 and 1
+    (make both)
+
