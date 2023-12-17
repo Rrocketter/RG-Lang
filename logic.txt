@@ -19,7 +19,7 @@ POWER : call (POW factor)*
 
 call : atom (LPAREN (expression (COMMA expression)*)? RPAREN)?
 
-atom :  INT | FlOAT | IDENTIFIER
+atom :  INT | FlOAT | STRING | IDENTIFIER
      :  LPAREN EXPR RPAREN
      :  if-expression
      :  for-expression
