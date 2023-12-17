@@ -15,13 +15,16 @@ term : factor ((MUL| DIV) factor ) *
 factor : (PLUS | MINUS) factor
        : power
 
-POWER : atom (POW factor)*
+POWER : call (POW factor)*
+
+call : atom (LPAREN (expression (COMMA expression)*)? RPAREN)?
 
 atom :  INT | FlOAT | IDENTIFIER
      :  LPAREN EXPR RPAREN
      :  if-expression
      :  for-expression
      :  while-expression
+     :  function-definition
 
 if-expression : KEYWORD: IF expression KEYWORD: THEN expression
                 (KEYWORD: ELIF expression KEYWORD: THEN expression)*
@@ -31,3 +34,9 @@ for-expression : KEYWORD: FOR IDENTIFIER EQ expression KEYWORD: TO expression
                  (KEYWORD: STEP expression)? KEYWORD: THEN expression
 
 while-expression : KEYWORD: WHILE expression KEYWORD: THEN expression
+
+function-definition : KEYWORD: FUNC IDENTIFIER?
+                     LPAREN (IDENTIFIER (COMMA IDENTIFIER)*)? RPAREN
+                     ARROW expression
+
+```
