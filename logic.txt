@@ -20,11 +20,14 @@ POWER : call (POW factor)*
 call : atom (LPAREN (expression (COMMA expression)*)? RPAREN)?
 
 atom :  INT | FlOAT | STRING | IDENTIFIER
-     :  LPAREN EXPR RPAREN
+     :  LPAREN expression RPAREN
+     :  list-expression
      :  if-expression
      :  for-expression
      :  while-expression
      :  function-definition
+
+list-expression : LSQUARE (expression (COMMA expression)*)? RSQUARE
 
 if-expression : KEYWORD: IF expression KEYWORD: THEN expression
                 (KEYWORD: ELIF expression KEYWORD: THEN expression)*
