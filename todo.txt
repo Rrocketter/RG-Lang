@@ -2,3 +2,7 @@
     right now only 0 and 1
     (make both)
 
+fix the CLEAR() function
+    make it work properly
+
+make all methods lowercase
