@@ -13,3 +13,5 @@ basic operators for math:
     *=
     /=
     ^=
+
+instruction guide to using the language

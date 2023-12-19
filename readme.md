@@ -14,3 +14,4 @@ In built functions in RG-Lang:
    * `pop(list, index)` - Removes the element at the given index from the given list.
 * `extend()` - Concats the two lists together
   * `extend(list1, list2)` - Concats the two lists together
+* `len()` - Returns the length of the given list.
