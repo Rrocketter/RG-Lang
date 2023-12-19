@@ -2,6 +2,8 @@
 * (zero or more)
 ? (optional)
 
+statements  : NEWLINE* expr (NEWLINE+ expr)* NEWLINE*
+
 expression : KEYWORD: VAR IDENTIFIER EQ expr
            : comparision expression (( KEYWORD: AND | KEYWORD: OR ) comparision expression)*
 
@@ -29,17 +31,28 @@ atom :  INT | FlOAT | STRING | IDENTIFIER
 
 list-expression : LSQUARE (expression (COMMA expression)*)? RSQUARE
 
-if-expression : KEYWORD: IF expression KEYWORD: THEN expression
-                (KEYWORD: ELIF expression KEYWORD: THEN expression)*
-                (KEYWORD: ELSE expression)?
+if-expr     : KEYWORD:IF expression KEYWORD:THEN
+              (expr if-expression-b|if-expr-c?)
+            | (NEWLINE statements KEYWORD:END|if-expression-b|if-expr-c)
 
-for-expression : KEYWORD: FOR IDENTIFIER EQ expression KEYWORD: TO expression
-                 (KEYWORD: STEP expression)? KEYWORD: THEN expression
+if-expr-b   : KEYWORD:ELIF expression KEYWORD:THEN
+              (expr if-expression-b|if-expression-c?)
+            | (NEWLINE statements KEYWORD:END|if-expression-b|if-expression-c)
 
-while-expression : KEYWORD: WHILE expression KEYWORD: THEN expression
+if-expr-c   : KEYWORD:ELSE
+              expression
+            | (NEWLINE statements KEYWORD:END)
 
-function-definition : KEYWORD: FUNC IDENTIFIER?
-                     LPAREN (IDENTIFIER (COMMA IDENTIFIER)*)? RPAREN
-                     ARROW expression
+for-expr    : KEYWORD:FOR IDENTIFIER EQ expression KEYWORD:TO expr
+              (KEYWORD:STEP expression)? KEYWORD:THEN
+              expression
+            | (NEWLINE statements KEYWORD:END)
 
-```
+while-expr  : KEYWORD:WHILE expression KEYWORD:THEN
+              expression
+            | (NEWLINE statements KEYWORD:END)
+
+func-def    : KEYWORD:FUN IDENTIFIER?
+              LPAREN (IDENTIFIER (COMMA IDENTIFIER)*)? RPAREN
+              (ARROW expression)
+            | (NEWLINE statements KEYWORD:END)
