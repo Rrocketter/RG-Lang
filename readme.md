@@ -1,4 +1,4 @@
-#RG-Lang
+# RG-Lang
 I created my own lanuage!
 It is based off of python. 
 In order to run, create a file with the .rg file extension. Then do `RUN("example.rg")` and it will work!
